@@ -77,6 +77,22 @@ body {
   margin: 0;
 }
 
+.tile.flip {
+  animation: 300ms linear flipping;
+}
+
+@keyframes flipping {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(90deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
 .grey-overlay {
   background-color: #3a3a3c !important;
   border:none !important;
