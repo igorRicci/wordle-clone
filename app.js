@@ -66,10 +66,39 @@ keys.forEach((key) => {
 
 const handleClick = (key) => {
   console.log('clicked', key);
+  if (key == '«') {
+    console.log('delete letter')
+    deleteLetter()
+    return
+  }
+  if (key == 'ENTER') {
+    console.log('check row')
+    return
+  }
   addLetter(key)
 }
 
 const addLetter = (letter) => {
-  const tile = document.getElementById('guessRow-' + currentRow + '-tile-' + currentTile)
-  tile.textContent = letter
+  if (currentTile < 5 && currentRow < 6) {
+    const tile = document.getElementById('guessRow-' + currentRow + '-tile-' + currentTile)
+    tile.textContent = letter
+    tile.setAttribute('data', letter)
+    guessRows[currentRow][currentTile] = letter
+    currentTile++
+    console.log('guessRows', guessRows);
+  } else {
+    console.log('reached limit');
+  }
+}
+
+const deleteLetter = () => {
+  if (currentTile > 0) {
+    currentTile--
+    const tile = document.getElementById('guessRow-' + currentRow + '-tile-' + currentTile)
+    tile.textContent = ''
+    tile.setAttribute('data', '')
+    guessRows[currentRow][currentTile] = ''
+  }
+
+
 }
