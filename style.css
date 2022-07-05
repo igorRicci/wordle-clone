@@ -20,3 +20,14 @@ body {
   align-items: center;
   justify-content: space-between;
 }
+
+.tile-container {
+  width: 330px;
+  margin-bottom: 30px;
+}
+
+.key-container {
+  width: 510px;
+  display: flex;
+  flex-wrap: wrap;
+}
