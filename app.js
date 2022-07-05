@@ -1,6 +1,8 @@
 const tileDisplay = document.querySelector('.tile-container')
+const messageDisplay = document.querySelector('.message-container')
 const keyboard = document.querySelector('.keyboard-container')
 
+const wordle = 'TEEMO'
 const keys = [
   'Q',
   'W',
@@ -72,7 +74,7 @@ const handleClick = (key) => {
     return
   }
   if (key == 'ENTER') {
-    console.log('check row')
+    checkRow()
     return
   }
   addLetter(key)
@@ -101,4 +103,23 @@ const deleteLetter = () => {
   }
 
 
+}
+
+const checkRow = () => {
+  const guess = guessRows[currentRow].join('')
+  if (currentTile === 5) {
+    console.log(`guess is ${guess}, wordle is ${wordle}`);
+    if (wordle == guess) {
+      showMessage('Magnificent!')
+    }
+  }
+}
+
+const showMessage = (message) => {
+  const messageElement = document.createElement('p')
+  messageElement.textContent = message
+  messageDisplay.append(messageElement)
+  setTimeout(() => {
+    messageDisplay.removeChild(messageElement)
+  }, 2000)
 }
