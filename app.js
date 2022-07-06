@@ -1,3 +1,5 @@
+// const { response } = require("express")
+
 const tileDisplay = document.querySelector('.tile-container')
 const messageDisplay = document.querySelector('.message-container')
 const keyboard = document.querySelector('.keyboard-container')
@@ -114,30 +116,39 @@ const deleteLetter = () => {
     tile.setAttribute('data', '')
     guessRows[currentRow][currentTile] = ''
   }
-
-
 }
 
 const checkRow = () => {
   const guess = guessRows[currentRow].join('')
 
+
   if (currentTile > 4) {
-    console.log(`guess is ${guess}, wordle is ${wordle}`);
-    flipTiles()
-    if (wordle == guess) {
-      showMessage('Magnificent!')
-      isGameOver = true
-      return
-    } else {
-      if (currentRow >= 5) {
-        isGameOver = true
-        showMessage('Game Over!')
-        return
-      } else {
-        currentRow++
-        currentTile = 0
-      }
-    }
+    fetch(`http://localhost:3000/check/?word=${guess}`)
+      .then(response => response.json())
+      .then(json => {
+        console.log(json)
+        if (json == 'Entry word not found') {
+          showMessage('Word is not valid')
+          return
+        } else {
+          console.log(`guess is ${guess}, wordle is ${wordle}`);
+          flipTiles()
+          if (wordle == guess) {
+            showMessage('Magnificent!')
+            isGameOver = true
+            return
+          } else {
+            if (currentRow >= 5) {
+              isGameOver = true
+              showMessage('Game Over!')
+              return
+            } else {
+              currentRow++
+              currentTile = 0
+            }
+          }
+        }
+      }).catch(err => console.log(err))
   }
 }
 
