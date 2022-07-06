@@ -5,7 +5,7 @@ const keyboard = document.querySelector('.keyboard-container')
 let wordle
 
 const getWordle = () => {
-  fetch('http://localhost:8000/word')
+  fetch('http://localhost:3000/word')
     .then(response => response.json())
     .then(json =>  {
       console.log(json)
