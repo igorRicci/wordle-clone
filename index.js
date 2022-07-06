@@ -5,7 +5,7 @@ const express = require("express")
 const app = express()
 
 app.get('/word', (req, res) => {
-  
+
   const options = {
     method: 'GET',
     url: 'https://random-words5.p.rapidapi.com/getMultipleRandom',
@@ -23,4 +23,4 @@ app.get('/word', (req, res) => {
   })
 })
 
-app.listen(POST, () => console.log('Server running on port ' + PORT))
+app.listen(PORT, () => console.log('Server running on port ' + PORT))
