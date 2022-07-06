@@ -82,17 +82,19 @@ keys.forEach((key) => {
 })
 
 const handleClick = (key) => {
-  console.log('clicked', key);
-  if (key == '«') {
-    console.log('delete letter')
-    deleteLetter()
-    return
+  if (!isGameOver) {
+    console.log('clicked', key);
+    if (key == '«') {
+      console.log('delete letter')
+      deleteLetter()
+      return
+    }
+    if (key == 'ENTER') {
+      checkRow()
+      return
+    }
+    addLetter(key)
   }
-  if (key == 'ENTER') {
-    checkRow()
-    return
-  }
-  addLetter(key)
 }
 
 const addLetter = (letter) => {
@@ -128,6 +130,7 @@ const checkRow = () => {
       .then(json => {
         console.log(json)
         if (json == 'Entry word not found') {
+          console.log('aqui estamos');
           showMessage('Word is not valid')
           return
         } else {
